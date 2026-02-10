@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "288052657303",
+    "project_id": "foodcook-47c45",
+    "storage_bucket": "foodcook-47c45.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288052657303:android:087081117f10089c63bdd2",
+        "android_client_info": {
+          "package_name": "com.example.ed_tech_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoFFXZ91uot-sYHKGb7yxEZ_nJjPVVnLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
