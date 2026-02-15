@@ -3,8 +3,8 @@ import 'package:ed_tech_app/configs/videourls.dart';
 import 'package:ed_tech_app/screen/youtube_player_screen.dart';
 import 'package:flutter/material.dart';
 
-class DessertsPage extends StatelessWidget {
-  const DessertsPage({super.key});
+class StreetFood extends StatelessWidget {
+  const StreetFood ({super.key});
 
   Widget _buildFooterText() {
     return Column(
@@ -17,7 +17,7 @@ class DessertsPage extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'Sweet delights coming your way ✨\nMore desserts will be added soon 🍨',
+          'Stay Tuned, More Street Food will be updated soon🍨',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 13,
@@ -36,10 +36,11 @@ class DessertsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       _DessertItem(
-        'Gajar Ka Halwa',
-        'assets/desserts/gajarkahalwa.png',
-        VideoUrls.gajarkahalwa,
+        'Chole Kulche',
+        'assets/street_food/chole_kulche.jpg',
+        VideoUrls.chole_kulche,
       ),
+     
     ];
 
     return Scaffold(

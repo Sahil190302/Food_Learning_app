@@ -12,4 +12,10 @@ class VideoUrls {
 
   static const String gajarkahalwa =
       'https://youtu.be/LKzDV94y4p4?si=n9xETzHvFlhxnmDE';
+  static const String grilledchicken =
+      "https://www.youtube.com/watch?v=dIN6v_Q1yfc&list=PLaBD7A5N5JXSowf2mqeppm0yPU3cYRPGV";
+  static const String Sauteed_vege =
+      "https://www.youtube.com/watch?v=um7OXiIEMCw&list=PLaBD7A5N5JXSowf2mqeppm0yPU3cYRPGV&index=2";
+  static const String chole_kulche =
+      "https://www.youtube.com/watch?v=MXZJbPurJ9A";
 }

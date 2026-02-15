@@ -1,7 +1,9 @@
 import 'dart:ui';
 import 'dart:math' as math;
 import 'package:ed_tech_app/screen/dessert_page.dart';
+import 'package:ed_tech_app/screen/indian_continental.dart';
 import 'package:ed_tech_app/screen/indian_veg_page.dart';
+import 'package:ed_tech_app/screen/street_food.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -139,8 +141,7 @@ class _DashboardPageState extends State<DashboardPage>
                       _buildCategoryGrid(),
                       const SizedBox(height: 32),
                       _buildFeaturedSection(),
-                      const SizedBox(height: 32),
-                      _buildTrendingSection(),
+
                       const SizedBox(height: 100),
                     ],
                   ),
@@ -604,6 +605,16 @@ class _DashboardPageState extends State<DashboardPage>
             context,
             MaterialPageRoute(builder: (_) => const DessertsPage()),
           );
+        } else if (data.title == 'Continental') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const IndianContinental()),
+          );
+        } else if (data.title == 'Street Food') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const StreetFood()),
+          );
         } else {
           _showComingSoonDialog(context, data.title);
         }
@@ -883,34 +894,6 @@ class _DashboardPageState extends State<DashboardPage>
           fontWeight: FontWeight.w700,
         ),
       ),
-    );
-  }
-
-  Widget _buildTrendingSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Trending Now',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
-        const SizedBox(height: 20),
-        SizedBox(
-          height: 220,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return _buildTrendingCard(index);
-            },
-          ),
-        ),
-      ],
     );
   }
 
