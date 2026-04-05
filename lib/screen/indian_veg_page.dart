@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:ed_tech_app/configs/videourls.dart';
+import 'package:ed_tech_app/screen/reciepe_detail_screen.dart';
 import 'package:ed_tech_app/screen/youtube_player_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -149,7 +150,16 @@ class _GlassFoodCard extends StatelessWidget {
                       text: 'Read Recipe',
                       onTap: () {
                         Navigator.pop(context);
-                        // TODO: Navigate to recipe screen
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => RecipeDetailScreen(
+                              title: item.name,
+                              image: item.image,
+                            ),
+                          ),
+                        );
                       },
                     ),
 
