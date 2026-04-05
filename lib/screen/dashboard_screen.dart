@@ -1,8 +1,13 @@
 import 'dart:ui';
 import 'dart:math' as math;
+import 'package:ed_tech_app/home/home_page.dart';
+import 'package:ed_tech_app/screen/add_reciepe_dialog_screen.dart';
 import 'package:ed_tech_app/screen/dessert_page.dart';
 import 'package:ed_tech_app/screen/indian_continental.dart';
 import 'package:ed_tech_app/screen/indian_veg_page.dart';
+import 'package:ed_tech_app/screen/privacy_policy/privacy_screen.dart';
+import 'package:ed_tech_app/screen/privacy_policy/return.dart';
+import 'package:ed_tech_app/screen/privacy_policy/terms_conditon.dart';
 import 'package:ed_tech_app/screen/street_food.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -76,7 +81,12 @@ class _DashboardPageState extends State<DashboardPage>
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Scaffold(
+    return WillPopScope(
+    onWillPop: () async {
+      return false; // blocks back button
+    },
+    child: Scaffold(
+      drawer: _buildDrawer(),
       backgroundColor: const Color(0xFF0F0F1B),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -109,11 +119,21 @@ class _DashboardPageState extends State<DashboardPage>
             ),
           ],
         ),
+        leading: Builder(
+    builder: (context) => IconButton(
+      icon: const Icon(Icons.menu, color: Colors.white),
+      onPressed: () {
+        Scaffold.of(context).openDrawer();
+      },
+    ),
+  ),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
         actions: [_buildNotificationButton(), const SizedBox(width: 8)],
       ),
+
+      
       body: Stack(
         children: [
           // Animated background gradient mesh
@@ -154,8 +174,76 @@ class _DashboardPageState extends State<DashboardPage>
       bottomNavigationBar: _buildBottomNavBar(),
       floatingActionButton: _buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    )
     );
   }
+
+  Widget _buildDrawer() {
+  return Drawer(
+    child: Container(
+      color: const Color(0xFF0F0F1B),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color(0xFF1A1A2E),
+            ),
+            child: Text(
+              "Daawat-e-Ishq",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          _drawerItem(
+            "Privacy Policy",
+            Icons.privacy_tip,
+            const PrivacyPolicyScreen(),
+          ),
+
+          _drawerItem(
+            "Terms and Conditions",
+            Icons.description,
+            const TermsScreen(),
+          ),
+
+          _drawerItem(
+            "Return and Refund",
+            Icons.assignment_return,
+            const ReturnRefundScreen(),
+          ),
+
+          _drawerItem(
+            "Log Out",
+            Icons.logout,
+            const HomePage(),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _drawerItem(String title, IconData icon, Widget screen) {
+  return ListTile(
+    leading: Icon(icon, color: Colors.white),
+    title: Text(
+      title,
+      style: const TextStyle(color: Colors.white),
+    ),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => screen),
+      );
+    },
+  );
+}
 
   Widget _buildAnimatedBackground() {
     return AnimatedBuilder(
@@ -489,6 +577,8 @@ class _DashboardPageState extends State<DashboardPage>
       ],
     );
   }
+
+  
 
   void _showComingSoonDialog(BuildContext context, String title) {
     showDialog(
@@ -1088,25 +1178,48 @@ class _DashboardPageState extends State<DashboardPage>
   }
 
   Widget _buildFloatingActionButton() {
-    return Container(
-      height: 64,
-      width: 64,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFFFF6B6B).withOpacity(0.4),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+    return GestureDetector(
+      onTap: () async {
+        final categories = [
+          "Indian Veg",
+          "Continental",
+          "Healthy",
+          "Street Food",
+          "Desserts",
+          "Beverages",
+        ];
+
+        final result = await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => AddRecipeDialogScreen(categories: categories),
           ),
-        ],
+        );
+
+        if (result != null) {
+          setState(() {});
+        }
+      },
+      child: Container(
+        height: 64,
+        width: 64,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFFFF6B6B).withOpacity(0.4),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: const Icon(Icons.add, color: Colors.white, size: 28),
       ),
-      child: const Icon(Icons.add, color: Colors.white, size: 28),
     );
   }
 }
